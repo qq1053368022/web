@@ -1,0 +1,23 @@
+spring:
+  profiles:
+    active: local
+  http:
+    encoding:
+      force: false
+      charset: UTF-8
+      enabled: true
+  jackson:
+    time-zone: Asia/Shanghai
+    default-property-inclusion: non_null
+  resources:
+    static-locations: classpath:/static/
+
+server:
+  port: 8804
+  servlet:
+    context-path: /server
+  tomcat:
+    uri-encoding: UTF-8
+
+
+
