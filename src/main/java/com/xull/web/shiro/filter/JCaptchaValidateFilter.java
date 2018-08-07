@@ -1,6 +1,9 @@
 package com.xull.web.shiro.filter;
 
 import com.xull.web.shiro.jcaptcha.JCaptcha;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.session.Session;
+import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.filter.AccessControlFilter;
 import org.apache.shiro.web.util.WebUtils;
 
@@ -28,10 +31,20 @@ public class JCaptchaValidateFilter extends AccessControlFilter {
 
     @Override
     protected boolean isAccessAllowed(ServletRequest request, ServletResponse response, Object mappedValue) throws Exception {
+
+
+        //0、获取会话中JCaptchaType的值,如果有该值说明已经调用了JCaptchaFilter
+        Subject subject = SecurityUtils.getSubject();
+        Session session = subject.getSession();
+        if(session.getAttribute("jCaptchaType")!=null){
+            jcaptchaEbabled = (Boolean) session.getAttribute("jCaptchaType");
+        }
+
         //1、设置验证码是否开启属性，页面可以根据该属性来决定是否显示验证码
         request.setAttribute("jcaptchaEbabled", jcaptchaEbabled);
 
         HttpServletRequest httpServletRequest = WebUtils.toHttp(request);
+
         //2、判断验证码是否禁用 或不是表单提交（允许访问）
         if (jcaptchaEbabled == false || !"post".equalsIgnoreCase(httpServletRequest.getMethod())) {
             return true;
@@ -45,4 +58,6 @@ public class JCaptchaValidateFilter extends AccessControlFilter {
         request.setAttribute(failureKeyAttribute, "jCaptcha.error");
         return true;
     }
+
+
 }

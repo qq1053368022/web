@@ -255,7 +255,7 @@ public class ShiroConfig {
     @Bean
     public JCaptchaValidateFilter jCaptchaValidateFilter() {
         JCaptchaValidateFilter jCaptchaValidateFilter = new JCaptchaValidateFilter();
-        jCaptchaValidateFilter.setJcaptchaEbabled(true);
+        jCaptchaValidateFilter.setJcaptchaEbabled(false);
         jCaptchaValidateFilter.setJcaptchaParam("jcaptchaCode");
         jCaptchaValidateFilter.setFailureKeyAttribute("shiroLoginFailure");
         return jCaptchaValidateFilter;

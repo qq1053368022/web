@@ -1,5 +1,6 @@
 package com.xull.web.controller;
 
+import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.ExcessiveAttemptsException;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
@@ -81,12 +82,17 @@ public class WebController {
             error = "用户名/密码错误";
         } else if (IncorrectCredentialsException.class.getName().equals(exceptionClassName)) {
             error = "用户名/密码错误";
+        }else if (AuthenticationException.class.getName().equals(exceptionClassName)){
+            error = "身份认证失败";
         } else if (ExcessiveAttemptsException.class.getName().equals(exceptionClassName)) {
             error = "登陆次数超过限制";
         } else if ("jCaptcha.error".equals(exceptionClassName)){
             error = "验证码错误";
         }else if (exceptionClassName != null) {
             error = "错误:" + exceptionClassName;
+        }
+        if (error != "") {
+            request.setAttribute("jcaptchaEbabled", true);
         }
         model.addAttribute("error", error);
         return "login";

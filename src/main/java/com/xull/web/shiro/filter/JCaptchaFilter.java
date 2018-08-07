@@ -36,6 +36,9 @@ public class JCaptchaFilter extends OncePerRequestFilter {
         Session session = subject.getSession();
 //        String id = request.getRequestedSessionId();
         String id = session.getId().toString();
+        //凡是调用过该函数,便给会话jCaptchaType属性赋值true,以便下一次验证时候,识别到该属性，以执行验证。
+        session.setAttribute("jCaptchaType",true);
+
         BufferedImage bi = JCaptcha.captchaService.getImageChallengeForID(id);
 
         ServletOutputStream out = response.getOutputStream();
