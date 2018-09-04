@@ -26,4 +26,18 @@ spring:
     suffix: .ftl
     template-loader-path: classpath:/templates/
     request-context-attribute: request
-
+  application:
+    name: springboot-rabbitmq
+#  RabbitMQ的服务配置
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+    username: guest
+    password: guest
+    virtual-host: /
+#    开启消息发送
+    publisher-confirms: true
+    publisher-returns: true
+#    返回无法插入的队列消息
+    template:
+      mandatory: true
