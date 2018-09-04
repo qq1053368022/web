@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.util.concurrent.TimeoutException;
 
 /**
- * @description:
+ * @description: 消息队列发送端
  * @author: xull
  * @date: 2018-08-28 15:56
  */
