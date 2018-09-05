@@ -9,12 +9,15 @@ import java.util.List;
 
 @Data
 @Entity
-public class SysUser implements Serializable {
+public class SysUser extends BaseEntity {
 
     private static final long serialVersionUID = 3764455704256550218L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    private Long id;
+
+
     private String username;
     private String password;
     private String status;
@@ -32,24 +35,24 @@ public class SysUser implements Serializable {
         return roleList;
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        if (this==obj){
-            return true;
-        }
-        if (obj==null||getClass()!=obj.getClass()){
-            return false;
-        }
-        SysUser user=(SysUser) obj;
-        if (id!=null?id.equals(user.id):user.id!=null){
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        return id!=null?id.hashCode():0;
-    }
+//    @Override
+//    public boolean equals(Object obj) {
+//        if (this==obj){
+//            return true;
+//        }
+//        if (obj==null||getClass()!=obj.getClass()){
+//            return false;
+//        }
+//        SysUser user=(SysUser) obj;
+//        if (this.getFid()!=null?this.getFid().equals(user.getFid()):user.getFid()!=null){
+//            return false;
+//        }
+//        return true;
+//    }
+//
+//    @Override
+//    public int hashCode() {
+//        return id!=null?id.hashCode():0;
+//    }
 
 }

@@ -10,13 +10,13 @@ import java.util.List;
 
 @Entity
 @Data
-public class SysRole implements Serializable {
+public class SysRole extends BaseEntity {
 
     private static final long serialVersionUID = -5608514271095262480L;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    private Long id;
 
     private String name;
 

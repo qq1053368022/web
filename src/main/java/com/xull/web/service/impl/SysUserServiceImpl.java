@@ -1,7 +1,8 @@
 package com.xull.web.service.impl;
 
 import com.xull.web.entity.SysUser;
-import com.xull.web.repository.SysUserRepository;
+import com.xull.web.repository.BaseRepository;
+import com.xull.web.repository.UserRepository;
 import com.xull.web.service.SysUserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,11 +15,11 @@ import java.util.Optional;
 
 @Transactional
 @Service( "sysUserService")
-public class SysUserServiceImpl extends BaseServiceImpl<SysUser,Long> implements SysUserService {
+public class SysUserServiceImpl extends BaseServiceImpl<SysUser,String> implements SysUserService {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
-    private SysUserRepository sysUserRepository;
+    private UserRepository sysUserRepository;
     @Autowired
     private PasswordHelper passwordHelper;
 
@@ -29,7 +30,7 @@ public class SysUserServiceImpl extends BaseServiceImpl<SysUser,Long> implements
     }
 
     @Override
-    public void changePassword(Long userId, String newPassword) {
+    public void changePassword(String  userId, String newPassword) {
         Optional<SysUser> optional = sysUserRepository.findById(userId);
         if (optional.isPresent()){
             SysUser user=optional.get();
@@ -53,11 +54,10 @@ public class SysUserServiceImpl extends BaseServiceImpl<SysUser,Long> implements
         }
     }
 
+
     @Override
     @PostConstruct
-    public void setBaseMapper() {
-        super.setBaseMapper(sysUserRepository);
+    public BaseRepository<SysUser, String> getBaseRepository() {
+        return this.sysUserRepository;
     }
-
-
 }

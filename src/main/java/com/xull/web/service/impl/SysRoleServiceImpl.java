@@ -1,7 +1,8 @@
 package com.xull.web.service.impl;
 
 import com.xull.web.entity.SysRole;
-import com.xull.web.repository.SysRoleRepository;
+import com.xull.web.repository.BaseRepository;
+import com.xull.web.repository.RoleRepository;
 import com.xull.web.service.SysRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,15 +13,10 @@ import java.util.Optional;
 
 @Transactional
 @Service("sysRoleService")
-public class SysRoleServiceImpl extends BaseServiceImpl<SysRole,Long> implements SysRoleService {
+public class SysRoleServiceImpl extends BaseServiceImpl<SysRole,String > implements SysRoleService {
     @Autowired
-    SysRoleRepository sysRoleRepository;
+    RoleRepository sysRoleRepository;
 
-    @Override
-    @PostConstruct
-    public void setBaseMapper() {
-        super.setBaseMapper(sysRoleRepository);
-    }
 
     @Override
     public SysRole findByName(String name) {
@@ -32,4 +28,9 @@ public class SysRoleServiceImpl extends BaseServiceImpl<SysRole,Long> implements
         }
     }
 
+    @Override
+    @PostConstruct
+    public BaseRepository<SysRole, String> getBaseRepository() {
+        return this.sysRoleRepository;
+    }
 }

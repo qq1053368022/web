@@ -9,10 +9,10 @@ import javax.persistence.Id;
 
 @Entity
 @Data
-public class SysUrlFilter {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class SysUrlFilter extends BaseEntity{
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    private Long id;
 
     private String name;
     private String url;

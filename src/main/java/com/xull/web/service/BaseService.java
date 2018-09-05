@@ -1,5 +1,6 @@
 package com.xull.web.service;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -7,9 +8,8 @@ import java.util.List;
  * @author XuLL
  * @Time  2018-03-22  9:42
  */
-public interface BaseService<T,ID> {
+public interface BaseService<T,ID extends Serializable> {
 
-    public void setBaseMapper();
 
     <S extends T>void save(S entity);
 

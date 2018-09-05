@@ -3,11 +3,11 @@ package com.xull.web.service;
 
 import com.xull.web.entity.SysUser;
 
-public interface SysUserService  extends BaseService<SysUser,Long>{
+public interface SysUserService  extends BaseService<SysUser,String >{
 
     public SysUser createSysUser(SysUser user);
 
-    public void changePassword(Long userId, String newPassword);
+    public void changePassword(String  userId, String newPassword);
 
     public SysUser findByUsername(String username);
 

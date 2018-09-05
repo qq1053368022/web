@@ -3,5 +3,5 @@ package com.xull.web.service;
 
 import com.xull.web.entity.SysUrlFilter;
 
-public interface SysUrlFilterService extends BaseService<SysUrlFilter,Long> {
+public interface SysUrlFilterService extends BaseService<SysUrlFilter,String > {
 }
