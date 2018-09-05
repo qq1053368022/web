@@ -31,8 +31,12 @@ public class NewTask {
         };
         for (String message:messages){
             //MessageProties.PERSISTENT_TEXT_PLAIN 申明消息为粘性
-            channel.basicPublish("",QUEUE_NAME, MessageProperties.PERSISTENT_TEXT_PLAIN, message.getBytes());
-            System.out.println("[x] Sent '"+message+"'");
+
+            for (int i = 0; i <= 10000; i++) {
+                channel.basicPublish("",QUEUE_NAME, MessageProperties.PERSISTENT_TEXT_PLAIN, message.getBytes());
+                System.out.println("[x] Sent '"+message+"'");
+            }
+
         }
         channel.close();
         connection.close();

@@ -23,6 +23,7 @@ public class Subscriber {
         String bindKey = "error";
         channel.queueBind(queueName, EXCHANGE_NAME, bindKey);
         System.out.println("[*] Waiting for message ...");
+
         Consumer consumer = new DefaultConsumer(channel){
             @Override
             public void handleDelivery(String consumerTag, Envelope envelope, AMQP.BasicProperties properties, byte[] body) throws IOException {

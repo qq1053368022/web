@@ -8,8 +8,8 @@ import org.springframework.scheduling.annotation.EnableAsync;
 @SpringBootApplication
 @EnableAsync
 @EnableAspectJAutoProxy(exposeProxy = true)
-public class ServerAppLication  {
+public class ServerAppLocation  {
     public static void main(String[] args) {
-        SpringApplication.run(ServerAppLication.class, args);
+        SpringApplication.run(ServerAppLocation.class, args);
     }
 }

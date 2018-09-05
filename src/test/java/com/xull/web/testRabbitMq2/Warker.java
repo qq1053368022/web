@@ -4,6 +4,7 @@ import com.rabbitmq.client.*;
 
 import java.io.IOException;
 import java.util.concurrent.TimeoutException;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * @description:
@@ -22,6 +23,8 @@ public class Warker {
         boolean durable = true;
         channel.queueDeclare(QUEUE_NAME, durable, false, false, null);
         System.out.println("[*] waiting for message ..");
+        channel.basicQos(1);
+        AtomicInteger atomicInteger = new AtomicInteger(1);
         Consumer consumer = new DefaultConsumer(channel){
             @Override
             public void handleDelivery(String consumerTag, Envelope envelope, AMQP.BasicProperties properties, byte[] body) throws IOException {
@@ -29,23 +32,24 @@ public class Warker {
                 System.out.print("[x] received '" + message + "'");
                 try {
                     doWork(message);
+                    atomicInteger.incrementAndGet();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }finally {
-                    System.out.println("[x] Done");
+                    System.out.println("[x] Done" + atomicInteger.get());
                     channel.basicAck(envelope.getDeliveryTag(),false);
                 }
             }
         };
         //告诉rabbitMQ不要给同个worker同一时间分发超过一条消息
-        channel.basicQos(1);
+
         boolean autoAck = false;
         channel.basicConsume(QUEUE_NAME, autoAck, consumer);
     }
 
     private static void doWork(String task) throws InterruptedException {
         for (char ch : task.toCharArray()) {
-            if (ch=='.') Thread.sleep(1000);
+//            if (ch=='.') Thread.sleep(1000);
         }
     }
 }

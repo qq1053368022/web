@@ -29,8 +29,11 @@ public class Publisher {
                 "Fourth message"
         };
         for (String message : messages) {
-            channel.basicPublish(EXCHANGE_NAME, selectKey, null, message.getBytes());
-            System.out.println("[x] Sent '"+message+"'");
+            for (int i = 0; i < 1000; i++) {
+                channel.basicPublish(EXCHANGE_NAME, selectKey, null, message.getBytes());
+                System.out.println("[x] Sent '"+message+"'");
+            }
+
         }
         channel.close();
         connection.close();
