@@ -2,8 +2,13 @@ package com.xull.web.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
+import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.List;
 
@@ -17,11 +22,21 @@ public class SysUser extends BaseEntity {
 //    @GeneratedValue(strategy = GenerationType.IDENTITY)
 //    private Long id;
 
-
+    @Column(name = "fusername")
+    @NotBlank
+    @Length(min = 5,max = 20)
     private String username;
+    @NotBlank
+    @Column(name = "fpassword")
     private String password;
+    @Column(name = "fstatus")
     private String status;
+    @Column(name = "fsalt")
     private String salt;
+
+    @Column(name = "femail")
+    @Email
+    private String email;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "SysUserRole",joinColumns = {@JoinColumn(name = "userId")},inverseJoinColumns = {@JoinColumn(name = "roleId")})

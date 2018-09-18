@@ -3,6 +3,10 @@ package com.xull.web.service.impl;
 import com.xull.web.entity.BaseEntity;
 import com.xull.web.repository.BaseRepository;
 import com.xull.web.service.BaseService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -44,5 +48,15 @@ public abstract class BaseServiceImpl<T extends BaseEntity, ID extends Serializa
     @Override
     public <S extends T> void delete(S entity) {
         getBaseRepository().delete(entity);
+    }
+
+    @Override
+    public Page<T> findAll(Pageable pageable) {
+        return getBaseRepository().findAll(pageable);
+    }
+
+    @Override
+    public Page<T> findAll(Specification<T> spec, Pageable pageable) {
+        return getBaseRepository().findAll(spec,pageable);
     }
 }

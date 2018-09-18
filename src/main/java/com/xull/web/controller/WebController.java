@@ -103,6 +103,11 @@ public class WebController {
         return "test/main";
     }
 
+    @RequestMapping(value = "/register")
+    public String register() {
+        return "register";
+    }
+
 //    @RequestMapping(value = "/img/jCaptcha.jpg")
 //    @ResponseBody
 //    public void getCaptchaImg(HttpServletRequest request,HttpServletResponse response) throws IOException {

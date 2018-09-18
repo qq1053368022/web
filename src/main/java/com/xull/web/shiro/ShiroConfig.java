@@ -298,10 +298,9 @@ public class ShiroConfig {
 
         Map<String, String> map = new LinkedHashMap<>();
         map.put("/static/**", "anon");
-        map.put("/js/**", "anon");
-        map.put("/css/**", "anon");
+        map.put("/public/**", "anon");
         map.put("/img/**", "anon");
-        map.put("/test/**", "anon");
+        map.put("/register/**", "anon");
         map.put("/login","jCaptcha,authc");
         map.put("/logout", "logout");
         map.put("/**", "user,kickout");
@@ -392,7 +391,7 @@ public class ShiroConfig {
         FilterRegistrationBean registration = new FilterRegistrationBean();
         JCaptchaFilter jCaptchaFilter = new JCaptchaFilter();
         registration.setFilter(jCaptchaFilter);
-        registration.addUrlPatterns("/img/jcaptcha.jpg");
+        registration.addUrlPatterns("/static/img/jcaptcha.jpg");
         registration.setAsyncSupported(true);
         return registration;
     }

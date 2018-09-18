@@ -1,40 +1,33 @@
-package com.xull.web.entity;
+package com.xull.file.model;
 
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
 
 /**
  * @description:
  * @author: xull
- * @date: 2018-09-05 10:04
+ * @date: 2018-09-07 9:09
  */
 @MappedSuperclass //@MappedSuperclass为引用类型
 @Getter
 @Setter
 @EntityListeners(AuditingEntityListener.class)
-public class BaseEntity implements Serializable {
-
-    private static final long serialVersionUID = -285987672365358802L;
+public class BaseModel implements Serializable {
+    private static final long serialVersionUID = -2335142100397670710L;
     @Id
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid",strategy = "uuid2")
     @Column(nullable = false,length = 100,name = "fid")
     private String id;
 
-    @CreatedDate
-    @Column(name = "fcreatetime")
-    private Date createTime;
+    @Column(name = "fname")
+    private String name;
 
-    @LastModifiedDate
-    @Column(name = "fupdatetime")
-    private Date updateTime;
+    @Column(name = "furl")
+    private String url;
 }

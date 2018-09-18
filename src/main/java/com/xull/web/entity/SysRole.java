@@ -17,9 +17,9 @@ public class SysRole extends BaseEntity {
 //    @Id
 //    @GeneratedValue(strategy = GenerationType.IDENTITY)
 //    private Long id;
-
+    @Column(name = "fname")
     private String name;
-
+    @Column(name = "fdescription")
     private String description;
 
     @ManyToMany(fetch = FetchType.EAGER)

@@ -28,7 +28,7 @@ public class UserRealm extends AuthorizingRealm {
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
         String username = (String) super.getAvailablePrincipal(principalCollection);
-        SysUser user = sysUserService.findByUsername(username);
+        SysUser user = sysUserService.userLogin(username);
         if (user != null) {
             SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
             for (SysRole role : user.getRoleList()) {
@@ -43,7 +43,7 @@ public class UserRealm extends AuthorizingRealm {
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
         String username=(String)authenticationToken.getPrincipal();
-        SysUser user = sysUserService.findByUsername(username);
+        SysUser user = sysUserService.userLogin(username);
         /*
         //检验用户是否已经登陆，若已经登陆，将已经登陆的用户的session注销
 

@@ -1,4 +1,4 @@
-package com.xull.web;
+package com.xull;
 
 import com.xull.web.entity.SysPermission;
 import com.xull.web.entity.SysRole;
@@ -23,8 +23,9 @@ public class SetData extends BasicUtClass{
     @Test
     public void setSysUserService() {
         SysUser sysUser=new SysUser();
-        sysUser.setUsername("admin");
-        sysUser.setPassword("123");
+        sysUser.setUsername("administrator");
+        sysUser.setEmail("1053368022@qq.com");
+        sysUser.setPassword("123456");
         sysUser.setStatus("1");
         sysUserService.createSysUser(sysUser);
     }

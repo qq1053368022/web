@@ -41,5 +41,9 @@
         <@shiro.guest>
             您当前是游客，<a href="${request.contextPath}/login" >登录</a>
         </@shiro.guest>
+<form action="${request.contextPath}/upload" method="post" enctype="multipart/form-data">
+    <input type="file" name="file">
+    <input type="submit" class="btn btn-primary" />
+</form>
 </body>
 </html>

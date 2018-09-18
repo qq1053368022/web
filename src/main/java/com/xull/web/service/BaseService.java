@@ -1,5 +1,9 @@
 package com.xull.web.service;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -22,4 +26,8 @@ public interface BaseService<T,ID extends Serializable> {
     void deleteById(ID id);
 
     <S extends T> void delete(S entity);
+
+    Page<T> findAll(Pageable pageable);
+
+    Page<T> findAll(Specification<T> spec, Pageable pageable);
 }

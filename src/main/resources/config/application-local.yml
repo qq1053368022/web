@@ -25,18 +25,14 @@ spring:
       time-between-eviction-runs-millis: 60000
       #配置一个连接在池中最小生存的时间，单位是毫秒
       min-evictable-idle-time-millis: 300000
-      #配置多个英文逗号分隔
-      filters: stat
+      #配置多个英文逗号分隔,配置监控统计拦截的filters，去掉后监控界面sql将无法统计，wall用于防火墙
+      filters: stat,wall,slf4j
+      stat-view-servlet:
+        login-username: admin
+        login-password: admin
+        reset-enable: false
 
-
-
-
-
-
-
-
-
-
+#jpa配置
   jpa:
     database: mysql
     show-sql: true
@@ -45,7 +41,7 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQL5Dialect
-
+#freemarker配置
   freemarker:
     cache: true
     check-template-location: true
@@ -55,20 +51,30 @@ spring:
     expose-session-attributes: true
     expose-spring-macro-helpers: true
     suffix: .ftl
-    template-loader-path: classpath:/templates/
+
+    template-loader-path: classpath:templates/
     request-context-attribute: request
-  application:
-    name: springboot-rabbitmq
-#  RabbitMQ的服务配置
-  rabbitmq:
-    host: 127.0.0.1
-    port: 5672
-    username: guest
-    password: guest
-    virtual-host: /
-#    开启消息发送
-    publisher-confirms: true
-    publisher-returns: true
-#    返回无法插入的队列消息
-    template:
-      mandatory: true
+  servlet:
+  #配置附件上传下载的数据大小
+    multipart:
+      max-request-size: 1024MB
+      max-file-size: 200MB
+logging:
+  path: classpath:logs/
+  config: classpath:config/logback.xml
+
+#  application:
+#    name: springboot-rabbitmq
+##  RabbitMQ的服务配置
+#  rabbitmq:
+#    host: 127.0.0.1
+#    port: 5672
+#    username: guest
+#    password: guest
+#    virtual-host: /
+##    开启消息发送
+#    publisher-confirms: true
+#    publisher-returns: true
+##    返回无法插入的队列消息
+#    template:
+#      mandatory: true

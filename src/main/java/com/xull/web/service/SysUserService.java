@@ -11,4 +11,6 @@ public interface SysUserService  extends BaseService<SysUser,String >{
 
     public SysUser findByUsername(String username);
 
+    public SysUser userLogin(String name);
+
 }
